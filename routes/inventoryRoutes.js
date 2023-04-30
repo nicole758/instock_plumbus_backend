@@ -10,4 +10,6 @@ router
   .put(inventoryController.updateInventory)
   .delete(inventoryController.deleteInventory);
 
+
+
 module.exports = router;

@@ -1,4 +1,6 @@
 const knex = require('knex')(require('../knexfile'));
+
+
 const { v4: uuidv4 } = require('uuid');
 
 
@@ -73,18 +75,27 @@ exports.updateWarehouse = (req, res) => {
 };
 
 
+
+
+//delete a warehouse from the list
 exports.deleteWarehouse = (req, res) => {
     knex('warehouses')
         .delete()
         .where({ id: req.params.id })
         .then(() => {
+
+
             // For DELETE response we can use 204 status code
             res.status(204).send(`Warehouse with id: ${req.params.id} has been deleted`);
         })
         .catch((err) =>
             res.status(400).send(`Error deleting Warehouse ${req.params.id} ${err}`)
         );
+
 };
+
+
+
 
 
 

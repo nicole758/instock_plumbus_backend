@@ -29,6 +29,8 @@ exports.singleInventory = (req, res) => {
     );
 };
 
+
+
 exports.updateInventory = (req, res) => {
   knex("inventories")
     .update(req.body)
@@ -84,3 +86,4 @@ exports.addInventory = (req, res) => {
     })
     .catch((err) => res.status(400).send(`Error creating Inventory: ${err}`));
 };
+
