@@ -1,8 +1,10 @@
-const router = require('express').Router();
-const inventoryController = require('../controllers/inventoryController');
+const router = require("express").Router();
+const inventoryController = require("../controllers/inventoryController");
 
-router.route('/').get(inventoryController.index);
+//Root fetch
+router.route("/").get(inventoryController.index);
+
+//By ID fetch
+router.route("/:id").get(inventoryController.singleInventory);
 
 module.exports = router;
-
-
