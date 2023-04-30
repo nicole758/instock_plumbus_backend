@@ -1,4 +1,5 @@
 const knex = require("knex")(require("../knexfile"));
+const { v4: uuidv4 } = require('uuid');
 
 exports.index = (_req, res) => {
   knex("inventories")
