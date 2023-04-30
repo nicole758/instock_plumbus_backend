@@ -42,7 +42,32 @@ exports.updateInventory = (req, res) => {
     );
 };
 
-<<<<<<< HEAD
+exports.addInventory = (req, res) => {
+  // Validate the request body for required data
+  if (
+    !req.body.warehouse_id ||
+    !req.body.item_name ||
+    !req.body.description ||
+    !req.body.category ||
+    !req.body.status ||
+    !req.body.quantity
+  ) {
+    return res
+      .status(400)
+      .send("Please make sure to provide all required fields");
+  }
+
+  const id = uuidv4();
+  knex("inventories")
+    .insert({ ...req.body, id })
+    .then((data) => {
+      // For POST requests we need to respond with 201 and the location of the newly created record
+      const newInventoryURL = `/inventories/${id}`;
+      res.status(201).location(newInventoryURL).send(newInventoryURL);
+    })
+    .catch((err) => res.status(400).send(`Error creating Inventory: ${err}`));
+};
+
 exports.deleteInventory = (req, res) => {
   knex("inventories")
     .delete()
@@ -51,30 +76,11 @@ exports.deleteInventory = (req, res) => {
       // For DELETE response we can use 204 status code
       res
         .status(204)
-        .send(`Inventory item with id: ${req.params.id} has been deleted`);
+        .send(`Inventory with id: ${req.params.id} has been deleted`);
     })
     .catch((err) =>
       res
         .status(400)
-        .send(`Error deleting Inventory item ${req.params.id} ${err}`)
+        .send(`Error deleting inventory item ${req.params.id} ${err}`)
     );
 };
-=======
-exports.addInventory = (req, res) => {
-    // Validate the request body for required data
-    if (!req.body.warehouse_id || !req.body.item_name || !req.body.description|| !req.body.category || !req.body.status || !req.body.quantity) {
-        return res.status(400).send('Please make sure to provide all required fields');
-    }
-
-    const id = uuidv4();
-    knex('inventories')
-        .insert({...req.body, id })
-        .then((data) => {
-            // For POST requests we need to respond with 201 and the location of the newly created record
-            const newInventoryURL = `/inventories/${id}`;
-            res.status(201).location(newInventoryURL).send(newInventoryURL);
-        })
-        .catch((err) => res.status(400).send(`Error creating Inventory: ${err}`));
-};
-
->>>>>>> develop
