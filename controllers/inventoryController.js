@@ -41,3 +41,21 @@ exports.updateInventory = (req, res) => {
       res.status(400).send(`Error updating inventory ${req.params.id} ${err}`)
     );
 };
+
+exports.addInventory = (req, res) => {
+    // Validate the request body for required data
+    if (!req.body.warehouse_id || !req.body.item_name || !req.body.description|| !req.body.category || !req.body.status || !req.body.quantity) {
+        return res.status(400).send('Please make sure to provide all required fields');
+    }
+
+    const id = uuidv4();
+    knex('inventories')
+        .insert({...req.body, id })
+        .then((data) => {
+            // For POST requests we need to respond with 201 and the location of the newly created record
+            const newInventoryURL = `/inventories/${id}`;
+            res.status(201).location(newInventoryURL).send(newInventoryURL);
+        })
+        .catch((err) => res.status(400).send(`Error creating Inventory: ${err}`));
+};
+
