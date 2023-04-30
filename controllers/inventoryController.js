@@ -42,6 +42,24 @@ exports.updateInventory = (req, res) => {
     );
 };
 
+<<<<<<< HEAD
+exports.deleteInventory = (req, res) => {
+  knex("inventories")
+    .delete()
+    .where({ id: req.params.id })
+    .then(() => {
+      // For DELETE response we can use 204 status code
+      res
+        .status(204)
+        .send(`Inventory item with id: ${req.params.id} has been deleted`);
+    })
+    .catch((err) =>
+      res
+        .status(400)
+        .send(`Error deleting Inventory item ${req.params.id} ${err}`)
+    );
+};
+=======
 exports.addInventory = (req, res) => {
     // Validate the request body for required data
     if (!req.body.warehouse_id || !req.body.item_name || !req.body.description|| !req.body.category || !req.body.status || !req.body.quantity) {
@@ -59,3 +77,4 @@ exports.addInventory = (req, res) => {
         .catch((err) => res.status(400).send(`Error creating Inventory: ${err}`));
 };
 
+>>>>>>> develop
