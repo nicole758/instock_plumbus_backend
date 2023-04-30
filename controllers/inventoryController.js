@@ -26,3 +26,5 @@ exports.singleInventory = (req, res) => {
         );
 };
 
+
+
