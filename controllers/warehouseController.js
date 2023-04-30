@@ -60,6 +60,7 @@ exports.addWarehouse = (req, res) => {
         .catch((err) => res.status(400).send(`Error creating Warehouse: ${err}`));
 };
 
+
 exports.updateWarehouse = (req, res) => {
     knex('warehouses')
         .update(req.body)
@@ -71,6 +72,7 @@ exports.updateWarehouse = (req, res) => {
             res.status(400).send(`Error updating Warehouse ${req.params.id} ${err}`)
         );
 };
+
 
 exports.deleteWarehouse = (req, res) => {
     knex('warehouses')
@@ -84,3 +86,6 @@ exports.deleteWarehouse = (req, res) => {
             res.status(400).send(`Error deleting Warehouse ${req.params.id} ${err}`)
         );
 };
+
+
+
