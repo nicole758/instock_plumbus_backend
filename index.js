@@ -3,6 +3,7 @@ const app = express();
 const PORT = process.env.PORT || 5050;
 const inventoryRoutes = require('./routes/inventoryRoutes');
 const warehouseRoutes = require('./routes/warehouseRoutes');
+
 const cors = require('cors');
 
 
